@@ -1,6 +1,8 @@
 # Practice_JavaScrip
 #practice_string
+
 function run() {
+
 	var str = "JavaScript";
 	str.charAt(0); // returns "J"
 
