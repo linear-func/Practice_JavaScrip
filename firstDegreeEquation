@@ -1,0 +1,70 @@
+/* The_Winner Đơn giản 150 Điểm
+Giới hạn ký tự: 3000
+Cho một chuỗi s là một phương trình chỉ chứa: 
+
+Các số.
+Các toán tử "+-*/".
+Một dấu '=' duy nhất.
+Ẩn 'x' .
+Lưu ý phương trình sẽ không chứa những trường hợp sau:
+
+Hệ số của x là x. Ví dụ "x*x=1"
+Khoảng trắng. Ví dụ "x + 1=3"
+Không chứa các toán tử liền kề nhau. Ví dụ "x-+3=0"
+x ở sau phép chia. Ví dụ "3/x=1".
+Hãy giải phương trình này. Nếu không thể thực hiện trả về "Math error" , nếu phương trình vô nghiệm trả về "No solution", nếu vô số nghiệm trả về "Infinite Solution".
+
+Ví dụ:
+
+Với s = "3+x=4" thì firstDegreeEquation(s)="1".
+Với s = "3*x=4" thì firstDegreeEquation(s)="4/3". */
+function firstDegreeEquation(s){
+    if(s.indexOf('/0')!=-1)
+    {
+        return "Math error";
+    }
+    let [a,b]=s.split('=');
+    let constant1=eval(a.replace(/x/g,'0'))
+    let coffe1=eval(a.replace(/x/g,'1'))-constant1;
+    let constant2=eval(b.replace(/x/g,'0'))
+    let coffe2=eval(b.replace(/x/g,'1'))-constant2;
+    let c=coffe1-coffe2;
+    let d=constant2-constant1;
+    if(c===0)
+    {
+        if(d===0)
+        {
+            return "Infinite Solution";
+        }
+        else
+        {
+            return "No solution";
+        }
+    }
+    function gdc(a, b) {
+    if ( ! b) {
+        return a;
+    }
+    return gcd(b, a % b);
+};
+    let result=d/c;
+    if(Math.round(result)===result)
+    {
+        return ""+result;
+    }
+    else
+    {
+        let gcd1=gcd(c,d)
+        d=d/gcd1;
+        c=c/gcd1;
+        let resultString=d+"/"+c
+        return resultString;
+    }
+    
+}
+function gcd(a, b) {
+    if ( ! b) {
+        return a;
+    }
+    return gcd(b, a % b);
+};
